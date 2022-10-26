@@ -212,3 +212,40 @@ def train(train_dataloader, test_dataloader,
     model.features = None
     
     return model, test_acc, test_loss, train_acc, train_loss, all_output_cor
+
+if __name__ == '__main__':
+
+    batch_size = 64
+    
+    # import the dataset
+    train_dataset = datasets.MNIST(root='../data', train=True,
+                                   transform=transforms.ToTensor())
+    test_dataset = datasets.MNIST(root='../data', train=False,
+                                  transform=transforms.ToTensor())
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+    
+    
+    learning_rate = 3e-4
+    num_epochs = 100
+    net_nums = 20
+    regularizations = [0,0.5,-1]
+    reg_dirs = ['Vanilla', 'Dropout', 'BatchNorm']
+    
+    # the path to save the results
+    root = "../results/MNIST_[100,50]/"
+
+    for i in range(len(regularizations)):
+        for j in range(net_nums):
+            print('This is {:}th Neural Network!'.format(i*net_nums+j+1))
+            model, test_acc, test_loss, train_acc, train_loss, net_cor = train_nn(train_dataloader = train_loader, \
+                 test_dataloader = test_loader, 
+                 n_neurons=[28*28,100,50,10], \
+                 learning_rate = learning_rate, num_epochs = num_epochs, 
+                 regularization = regularizations[i])
+            # save the model and its cor matrix
+            np.savetxt(root+reg_dirs[i]+"/net_cor/{:}th_FNN.txt".format(j),net_cor)
+            torch.save(model, root+reg_dirs[i]+"/model/{:}th_FNN.pt".format(j))
+    
+
