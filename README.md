@@ -8,17 +8,19 @@ This is an implementation of functional network for the deep neural network on P
 
 igraph=0.9.11, giotto-tda=0.5.0, PyTorch=1.10.0 or newer, numpy, scikit-learn, scipy
 
-## 1. Preprocess dataset
+## 1. Import the dataset and train neural networks
 MNIST, Fashion-MNIST and CIFAR-10 datasets can be downloaded in `./data` via pytorch.
 
-`train_dataset = datasets.MNIST(root='../data', train=True,
-                               transform=transforms.ToTensor())`
+Train the FCN.
+`python ./src/FCN.py` 
 
-`test_dataset = datasets.MNIST(root='../data', train=False,
-                              transform=transforms.ToTensor())`
+The trained FCN model and its cor matrix files are in `./results/`.
 
-## 2. Train neural networks
+## 2. Construct the graph model of the functional network
 
-## 3. Construct the graph model of the functional network
+`python ./src/GTA_Experiments.py` to construct the graph models for GTA
 
-## 4. Construct the simplicial complex model of the functional network
+## 3. Construct the simplicial complex model of the functional network
+
+`python ./src/TDA_Experiments.py` to construct the simplicial complex models
+and compute their persistence diagrams for TDA
