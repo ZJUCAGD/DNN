@@ -11,11 +11,11 @@ igraph=0.9.11, giotto-tda=0.5.0, PyTorch=1.10.0 or newer, numpy, scikit-learn, s
 ## 1. Preprocess dataset
 MNIST, Fashion-MNIST and CIFAR-10 datasets can be downloaded in `./data` via pytorch.
 
-'train_dataset = datasets.MNIST(root='../data', train=True,
-                               transform=transforms.ToTensor())'
+`train_dataset = datasets.MNIST(root='../data', train=True,
+                               transform=transforms.ToTensor())`
 
-'test_dataset = datasets.MNIST(root='../data', train=False,
-                              transform=transforms.ToTensor())'
+`test_dataset = datasets.MNIST(root='../data', train=False,
+                              transform=transforms.ToTensor())`
 
 ## 2. Train neural networks
 
